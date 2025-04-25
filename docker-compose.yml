@@ -1,0 +1,27 @@
+services:
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafanaPractica
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+  node_exporter:
+    image: node_exporter_custom
+    container_name: node_exporter
+    ports:
+      - "9100:9100"
+    tty: true
+    stdin_open: true
+
+volumes:
+  grafana-storage:
